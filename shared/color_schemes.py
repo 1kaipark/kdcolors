@@ -3103,26 +3103,190 @@ color_pattern = re.compile(r"#([0-9A-Fa-f]{6})")
 def parse_hex_colors_from_raw(text: str) -> list[str]:
     return color_pattern.findall(text)
 
- 
+rose_pine_raw = """
+/*
+* Variant: Rosé Pine
+* Maintainer: DankChoir
+*/
+
+@define-color base            #191724;
+@define-color surface         #1f1d2e;
+@define-color overlay         #26233a;
+
+@define-color muted           #6e6a86;
+@define-color subtle          #908caa;
+@define-color text            #e0def4;
+
+@define-color love            #eb6f92;
+@define-color gold            #f6c177;
+@define-color rose            #ebbcba;
+@define-color pine            #31748f;
+@define-color foam            #9ccfd8;
+@define-color iris            #c4a7e7;
+
+@define-color highlightLow    #21202e;
+@define-color highlightMed    #403d52;
+@define-color highlightHigh   #524f67;
+
+"""
+everblush_raw = """
+
+palette = 0=#232a2d;
+palette = 1=#e57474;
+palette = 2=#8ccf7e;
+palette = 3=#e5c76b;
+palette = 4=#67b0e8;
+palette = 5=#c47fd5;
+palette = 6=#6cbfbf;
+palette = 7=#b3b9b8;
+palette = 8=#2d3437;
+palette = 9=#ef7e7e;
+palette = 10=#96d988;
+palette = 11=#f4d67a;
+palette = 12=#71baf2;
+palette = 13=#ce89df;
+palette = 14=#67cbe7;
+palette = 15=#bdc3c2;
+background = #141b1e;
+foreground = #dadada;
+cursor-color = #dadada;
+
+* ADDING MORE LIGHTS *
+@define-color foam            #9ccfd8;
+cursor-text = #141b1e;
+selection-background = #141b1e;
+selection-foreground = #dadada;
+nord6: #eceff4;
+idk: #d3c6aa; 
+uhhhh: #9DA9A0;
+aoidsjfoisdaf: #7A8478;
+
+
+* some more dark cols wouldnt hurt
+dark: #232A2E;
+greenishdarks
+#2D353B; #475258;
+
+boi ts so tuff
+
+
+"""
+
+
+tokyonight_raw = """
+palette = 0=#15161e
+palette = 1=#f7768e
+palette = 2=#9ece6a
+palette = 3=#e0af68
+palette = 4=#7aa2f7
+palette = 5=#bb9af7
+palette = 6=#7dcfff
+palette = 7=#a9b1d6
+palette = 8=#414868
+palette = 9=#f7768e
+palette = 10=#9ece6a
+palette = 11=#e0af68
+palette = 12=#7aa2f7
+palette = 13=#bb9af7
+palette = 14=#7dcfff
+palette = 15=#c0caf5
+background = #1a1b26
+foreground = #c0caf5
+cursor-color = #c0caf5
+cursor-text = #1a1b26
+selection-background = #283457
+selection-foreground = #c0caf5
+
+
+palette = 0=#1b1d2b
+palette = 1=#ff757f
+palette = 2=#c3e88d
+palette = 3=#ffc777
+palette = 4=#82aaff
+palette = 5=#c099ff
+palette = 6=#86e1fc
+palette = 7=#828bb8
+palette = 8=#444a73
+palette = 9=#ff757f
+palette = 10=#c3e88d
+palette = 11=#ffc777
+palette = 12=#82aaff
+palette = 13=#c099ff
+palette = 14=#86e1fc
+palette = 15=#c8d3f5
+background = #222436
+foreground = #c8d3f5
+cursor-color = #c8d3f5
+cursor-text = #222436
+selection-background = #2d3f76
+selection-foreground = #c8d3f5
+palette = 0=#15161e
+palette = 1=#f7768e
+palette = 2=#9ece6a
+palette = 3=#e0af68
+palette = 4=#7aa2f7
+palette = 5=#bb9af7
+palette = 6=#7dcfff
+palette = 7=#a9b1d6
+palette = 8=#414868
+palette = 9=#f7768e
+palette = 10=#9ece6a
+palette = 11=#e0af68
+palette = 12=#7aa2f7
+palette = 13=#bb9af7
+palette = 14=#7dcfff
+palette = 15=#c0caf5
+background = #1a1b26
+foreground = #c0caf5
+cursor-color = #c0caf5
+cursor-text = #15161e
+selection-background = #33467c
+selection-foreground = #c0caf5
+"""
+
 CATPPUCCIN_MACCHIATO = catppuccin_rgb_palette(catppuccin_palette, "macchiato")
 CATPPUCCIN_FRAPPE = catppuccin_rgb_palette(catppuccin_palette, "frappe")
 CATPPUCCIN_MOCHA = catppuccin_rgb_palette(catppuccin_palette, "latte")
 CATPPUCCIN_LATTE = catppuccin_rgb_palette(catppuccin_palette, "macchiato")
+CATPPUCCIN = CATPPUCCIN_MACCHIATO + CATPPUCCIN_FRAPPE + CATPPUCCIN_MOCHA + CATPPUCCIN_LATTE
 GRUVBOX = parse_hex_css(gruvbox_palette)
 NORD=parse_hex_css(nord_css)
 EVERFOREST = [hex_to_rgb(col) for col in parse_hex_colors_from_raw(everforest_raw)]
+ROSE_PINE = parse_hex_css(rose_pine_raw)
+
+EVERBLUSH = parse_hex_css(everblush_raw)
+TOKYONIGHT = [hex_to_rgb(c) for c in parse_hex_colors_from_raw(tokyonight_raw)]
+
 
 schemes = {
     "catppuccin_macchiato": CATPPUCCIN_MACCHIATO,
     "catppuccin_frappe": CATPPUCCIN_FRAPPE,
     "catppuccin_mocha": CATPPUCCIN_MOCHA,
     "catppuccin_latte": CATPPUCCIN_LATTE,
+    "catppuccin": CATPPUCCIN,
     "gruvbox": GRUVBOX,
     "nord": NORD,
-    "everforest": EVERFOREST
+    "everforest": EVERFOREST,
+    "rose_pine": ROSE_PINE,
+    "everblush": list(set(EVERFOREST + EVERBLUSH)),
+    "tokyonight": TOKYONIGHT,
 }
 
 
+
+
+
+import numpy as np 
+import matplotlib.pyplot as plt 
+
+def plot_palette(palette: list[tuple[int, int, int]]):
+    f, axes = plt.subplots(1, len(palette))
+    for i in range(len(axes)):
+        axes[i].set_axis_off()
+        a = np.zeros((10, 10, 3), dtype=np.uint8)
+        a[:,:,:] = palette[i]
+        axes[i].imshow(a)
+    f.tight_layout(pad=0)
 
 
 
